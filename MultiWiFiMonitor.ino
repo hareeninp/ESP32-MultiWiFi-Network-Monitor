@@ -135,8 +135,8 @@ int         netCount  = 0;
 char alertEmail[64]   = "";
 char smtpEmail[64]    = "";   // sender email  — set from dashboard
 char smtpAppPass[64]  = "";   // app password  — set from dashboard
-char dashUser[33]     = "admin";
-char dashPass[65]     = "monitor123";
+char dashUser[33]     = "";
+char dashPass[65]     = "";
 char sessionToken[33] = "";
 
 PsychicHttpsServer server;

@@ -5,6 +5,9 @@ A standalone ESP32 device that continuously monitors up to **20 WiFi networks**,
 Configuration is done entirely through a self-hosted HTTPS dashboard served from the device's own access point — no reflashing needed to add networks, change SMTP credentials, or update login details.
 
 ---
+## Dashboard
+
+![Dashboard Settings](images/dashboard-settings.png)
 ## Features
 
 - **Monitors up to 20 WiFi networks** on a rotating 5-minute cycle

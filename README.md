@@ -188,4 +188,4 @@ These files live only on the device's flash storage — they are never part of t
 
 ## Version
 
-**v7.4** — tolerant WiFi connect logic (full 30s poll window, no early bail-out), channel-matched softAP to fix AP+STA coexistence, SMTP credentials configurable from the dashboard (no reflash).
+ — tolerant WiFi connect logic (full 30s poll window, no early bail-out), channel-matched softAP to fix AP+STA coexistence, SMTP credentials configurable from the dashboard (no reflash).

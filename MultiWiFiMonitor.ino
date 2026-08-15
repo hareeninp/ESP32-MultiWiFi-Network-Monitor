@@ -92,7 +92,7 @@ const char* server_key = R"EOF(-----BEGIN PRIVATE KEY-----
 #define ALERT_RECIPIENT   ""
 
 // ── IFTTT (leave blank "" to disable) ────────────────────────
-// ⚠ FILL IN LOCALLY if you use IFTTT
+// ⚠ FILL IN LOCALLY if you use IFTTT 
 #define IFTTT_KEY            ""
 #define IFTTT_ALERT_EVENT    "wifi_alert"
 #define IFTTT_RECOVERY_EVENT "wifi_recovery"
@@ -105,7 +105,7 @@ const char* server_key = R"EOF(-----BEGIN PRIVATE KEY-----
 
 // ── LittleFS files ────────────────────────────────────────────
 // NOTE: these files hold real secrets once the device is running
-// (WiFi passwords, dashboard login, SMTP app password). 
+// (WiFi passwords, dashboard login, SMTP app password).
 #define NETWORKS_FILE  "/networks.txt"
 #define EMAIL_FILE     "/email.txt"
 #define AUTH_FILE      "/auth.txt"
@@ -190,7 +190,22 @@ void generateToken() {
 }
 void clearToken() { memset(sessionToken, 0, sizeof(sessionToken)); }
 
+// True once a dashboard username AND password have been saved (either from
+// a prior boot's /auth.txt, or set during this session). False only on a
+// genuinely fresh device that has never had credentials configured.
+bool credentialsConfigured() {
+  return strlen(dashUser) > 0 && strlen(dashPass) > 0;
+}
+
+// FIRST-BOOT SETUP MODE: a brand-new device has empty dashUser/dashPass and
+// no way to pass the normal cookie-based login check — there is nothing to
+// log in WITH yet. Rather than lock the owner out of their own dashboard,
+// isAuthenticated() treats "no credentials configured" as implicitly
+// authenticated, but ONLY for as long as credentialsConfigured() is false.
+// The moment /saveauth stores a real username+password, this window closes
+// permanently and normal cookie/session auth is enforced on every request.
 bool isAuthenticated(PsychicRequest* req) {
+  if (!credentialsConfigured()) return true; // setup mode — no login exists yet
   if (!sessionToken[0]) return false;
   String ch = req->header("Cookie");
   if (!ch.length()) return false;
@@ -975,6 +990,20 @@ String buildDashboard() {
           "</div>";
   html += cycleRunning ? "<div class='dot run'></div>" : "<div class='dot ok'></div>";
   html += "<a class='logout-btn' href='/logout'>Sign Out</a></header>";
+
+  // ── First-boot setup banner ─────────────────────────────────
+  // Shown only while no dashboard username/password has been saved yet.
+  // The dashboard is reachable without a login during this window — set
+  // credentials immediately to close it.
+  if (!credentialsConfigured()) {
+    html += "<div class='box' style='border-color:var(--yellow)'>"
+            "<p style='font-size:.82rem;color:var(--yellow)'>&#9888; "
+            "<b>First-time setup:</b> no dashboard login is configured yet, "
+            "so this page is open without a password. Set a username and "
+            "password in <b>Change Login Credentials</b> below right now, "
+            "before leaving this device's WiFi range accessible to anyone else."
+            "</p></div>";
+  }
 
   // ── Summary cards ─────────────────────────────────────────
   html += "<div class='cards'>"

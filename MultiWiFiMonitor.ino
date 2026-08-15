@@ -58,7 +58,6 @@
 // ════════════════════════════════════════════════════════════
 //  TLS CERTIFICATE AND PRIVATE KEY  (self-signed, 1 year)
 //  ⚠ FILL IN — generate your own self-signed cert/key locally.
-//  DO NOT commit real certificate/key material to a public repo.
 // ════════════════════════════════════════════════════════════
 const char* server_cert = R"EOF(-----BEGIN CERTIFICATE-----
 // add yours
@@ -70,7 +69,7 @@ const char* server_key = R"EOF(-----BEGIN PRIVATE KEY-----
 
 // ════════════════════════════════════════════════════════════
 //  USER CONFIGURATION  ← edit AP name/pass here if needed
-//  ⚠ FILL IN LOCALLY — do not commit your real AP credentials.
+//  ⚠ FILL IN LOCALLY 
 // ════════════════════════════════════════════════════════════
 #define AP_SSID        ""   // ⚠ FILL IN: your ESP32's hotspot name
 #define AP_PASSWORD    ""   // ⚠ FILL IN: your ESP32's hotspot password (min 8 chars)
@@ -93,7 +92,7 @@ const char* server_key = R"EOF(-----BEGIN PRIVATE KEY-----
 #define ALERT_RECIPIENT   ""
 
 // ── IFTTT (leave blank "" to disable) ────────────────────────
-// ⚠ FILL IN LOCALLY if you use IFTTT — never commit a real key.
+// ⚠ FILL IN LOCALLY if you use IFTTT
 #define IFTTT_KEY            ""
 #define IFTTT_ALERT_EVENT    "wifi_alert"
 #define IFTTT_RECOVERY_EVENT "wifi_recovery"
@@ -106,8 +105,7 @@ const char* server_key = R"EOF(-----BEGIN PRIVATE KEY-----
 
 // ── LittleFS files ────────────────────────────────────────────
 // NOTE: these files hold real secrets once the device is running
-// (WiFi passwords, dashboard login, SMTP app password). Never copy
-// them into a git repo — see the provided .gitignore.
+// (WiFi passwords, dashboard login, SMTP app password). 
 #define NETWORKS_FILE  "/networks.txt"
 #define EMAIL_FILE     "/email.txt"
 #define AUTH_FILE      "/auth.txt"

@@ -5,29 +5,6 @@ A standalone ESP32 device that continuously monitors up to **20 WiFi networks**,
 Configuration is done entirely through a self-hosted HTTPS dashboard served from the device's own access point — no reflashing needed to add networks, change SMTP credentials, or update login details.
 
 ---
-
-## ⚠ Security Notice (read before publishing / forking)
-
-This repo is meant to be safe to publish publicly. All values a real deployment needs are left as **blank placeholders** in the sketch — you fill them in on your own local copy, never in git:
-
-- `AP_SSID` / `AP_PASSWORD` — your device's hotspot name/password
-- `server_cert` / `server_key` — your own self-signed TLS certificate and private key
-- `ALERT_RECIPIENT` — fallback alert email
-- `IFTTT_KEY` — your IFTTT Webhooks key
-- Dashboard login (`dashUser` / `dashPass`) — not hardcoded at all; set once from the device itself after first boot
-
-**Before you push to a public repo, double-check:**
-1. `server_cert` / `server_key` still say `// add yours` and don't contain a real key
-2. `AP_SSID`, `AP_PASSWORD`, `ALERT_RECIPIENT`, `IFTTT_KEY` are still blank
-3. You haven't committed `networks.txt`, `email.txt`, `auth.txt`, or `smtp.txt` — these are generated on the device at runtime and contain your real WiFi passwords, dashboard login, and Zoho app password. The included `.gitignore` excludes them, but double-check if you ever copy a LittleFS image into the repo.
-4. Your commit history doesn't contain an earlier version with real values (if it does, scrub history or start a fresh repo before making it public)
-
-None of the above is committed by default in this version of the code.
-
-**Also be aware (device-level, not a repo issue):** a freshly flashed device has no dashboard login yet, so the dashboard is open without a password until you set one — see step 6 under First-Time Setup. Set credentials before leaving a live device in range of anyone else.
-
----
-
 ## Features
 
 - **Monitors up to 20 WiFi networks** on a rotating 5-minute cycle

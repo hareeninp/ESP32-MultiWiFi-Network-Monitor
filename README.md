@@ -7,9 +7,6 @@ Configuration is done entirely through a self-hosted HTTPS dashboard served from
 ---
 ![Dashboard 1](wifi_monitor(1).jpeg)
 
-![Dashboard 2](wifi_monitor(2).jpeg)
-
-![Dashboard 3](wifi_monitor(3).jpeg)
 ## Features
 
 - **Monitors up to 20 WiFi networks** on a rotating 5-minute cycle
@@ -120,6 +117,9 @@ Leave as `""` to disable.
 - **On first boot, no dashboard login exists yet, so the dashboard is reachable without a password.** The `/login` page will send you straight to the dashboard automatically in this state — that's expected, not a bug. A yellow banner on the dashboard will remind you of this. **Immediately** go to **Change Login Credentials** and set a real username/password. As soon as you save them, the open window closes and every route requires the normal cookie-based login from then on (including after reboots, since credentials persist in LittleFS).
 - Until you've set credentials, treat the device's AP as unsecured — don't leave a freshly flashed unit powered on and in range of others before completing this step.
 
+
+![Dashboard 3](wifi_monitor(3).jpeg)
+
 ### 7. Set up Zoho SMTP (for email alerts)
 
 1. Sign in to [Zoho Accounts](https://accounts.zoho.in)
@@ -127,6 +127,9 @@ Leave as `""` to disable.
 3. Copy the generated app password
 4. On the dashboard, under **SMTP Settings**, enter your sender email + that app password
    - No reflashing required — stored in LittleFS on the device, not in the source code
+
+![Dashboard 2](wifi_monitor(2).jpeg)
+
 
 ### 8. Add networks to monitor
 
